@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <link rel="stylesheet" type="text/css" href="../css/theme.css">
+    <!-- <script data-main="scripts/main" src="scripts/require.js"></script>
+    <script data-main="scripts/main" src="scripts/jquery-3.2.1.min.js"></script>
+    <script data-main="scripts/main" src="scripts/lodash.js"></script> -->
+    <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js">
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.js">
+    </script>
+    <script>
+    $.getJSON("test.json", function(json) {
+        console.log(json); // this will show the info it in firebug console
+        //$('#menu').append($('<li>').append($('<a>'), {id: 'page3', href:'#', text:'page3'}));
+        //$('#menu').append($('<li>').append($('<a>'), {id: 'page3', href:'#', text:'page3', class:'chapter'}));
+        var submenu_item = {id: 'page1', href:'#', text:'page1', class:'chapter'};
+        // Create the li
+        var list_item = $("<li>");
+
+        // Create the anchor and use the object data to set the attribute and text
+        var anchor = $("<a>")
+               .attr("id",submenu_item.id)
+               .attr("href",submenu_item.href)
+               .attr("class",submenu_item.class)               
+               .text(submenu_item.text);
+        // Append the anchor to the li
+        list_item.append(anchor);
+
+        // Append the li to the menu
+        $('#menu').append(list_item);
+
+        //$('#menu').append($('<li>').append($('<a>', {id: 'page1', href:'#', text:'page1', class:'chapter'})))
+        $('#menu').append($('<li>').append($('<a>', {id: 'page2', href:'#', text:'page2', class:'chapter'})));
+        $('#menu').append($('<li>').append($('<a>', {id: 'page3', href:'#', text:'page3', class:'chapter'})));
+    });
+    $(document).ready( function() {
+        $(".chapter").on("click", function() {
+            $("#maincontent").load(this.id+".html");
+        });
+    });
+    </script>
+</head>
+<body>
+<div id="page">
+    <!-- The content is here inside loaded -->
+    <div id="maincontent"></div>
+
+    <div id="menuleftcontent">
+        <ul id="menu">
+        </ul>
+    </div>
+    <div id="clearingdiv"></div>
+</div>
+</body>
+</html>
